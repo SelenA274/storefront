@@ -20,7 +20,7 @@ export default function RegisterForm() {
     try {
       await authService.register(form)
       toast.success("Account created! Please verify your email.")
-      router.push("/login")
+      router.push("/verify-email")
     } catch (err: any) {
       toast.error(err.response?.data?.message || "Registration failed")
     } finally {
