@@ -8,6 +8,8 @@ import Navbar from "@/shared/components/Navbar"
 import AuthProvider from "@/shared/components/AuthProvider"
 import "./globals.css"
 import { Playfair_Display, Inter } from "next/font/google"
+import AnnouncementBar from "@/shared/components/AnnouncementBar"
+import Footer from "@/shared/components/footer"
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -29,8 +31,10 @@ export default function RootLayout({
       <body className="font-sans bg-white text-gray-900">
         <Provider store={store}>
           <AuthProvider>
+          <AnnouncementBar />
             <Navbar />
             {children}
+            <Footer />
             <ToastContainer position="top-right" autoClose={3000} />
           </AuthProvider>
         </Provider>
