@@ -22,7 +22,10 @@ export default function LoginForm() {
     setLoading(true)
     try {
       const res = await authService.login(form)
-      dispatch(setUser(res.data.user))
+      const token = res.data.data
+      localStorage.setItem("token", token)
+      const meRes = await authService.me()
+      dispatch(setUser(meRes.data.data))
       toast.success("Welcome back!")
       router.push("/")
     } catch (err: any) {
