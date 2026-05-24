@@ -6,6 +6,8 @@ import { setCart } from "@/features/cart/cartSlice"
 import { cartService } from "@/features/cart/cartService"
 import { toast } from "react-toastify"
 import Link from "next/link"
+import { Trash2 } from "lucide-react"
+
 
 export default function CartPage() {
   const dispatch = useAppDispatch()
@@ -44,42 +46,55 @@ export default function CartPage() {
   )
 
   return (
-    <main className="max-w-3xl mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-8">Your Cart</h1>
-      {items.length === 0 ? (
-        <p>Your cart is empty. <Link href="/products" className="underline">Shop now</Link></p>
-      ) : (
-        <div className="flex flex-col gap-4">
-{items.map((item: any) => (
-  <div key={item._id} className="flex items-center justify-between border p-4 rounded-lg">
-    <div className="flex items-center gap-4">
-      <div>
-        <p className="font-semibold">{item.product.name}</p>
-        <p className="text-sm text-gray-500">Qty: {item.quantity}</p>
+    <main>
+      <div className="bg-[#fde8ed] py-16 text-center">
+        <p className="text-[#c9a96e] text-sm tracking-[0.3em] uppercase mb-3">Your</p>
+        <h1 className="font-serif text-5xl text-gray-900">Shopping Cart</h1>
       </div>
-    </div>
-    <div className="flex items-center gap-4">
-      <p className="font-bold">${item.product.price * item.quantity}</p>
-      <button
-        onClick={() => handleRemove(item.product._id)}
-        className="text-red-500 hover:text-red-700 text-sm"
-      >
-        Remove
-      </button>
-    </div>
-  </div>
-))}
-          <div className="flex justify-between items-center border-t pt-4 mt-4">
-            <p className="text-xl font-bold">Total: ${total}</p>
-            <Link
-              href="/checkout"
-              className="bg-black text-white px-6 py-3 rounded-lg hover:bg-gray-800 transition"
-            >
-              Checkout
+      <div className="max-w-4xl mx-auto px-8 py-16">
+        {items.length === 0 ? (
+          <div className="text-center py-20">
+            <p className="font-serif text-3xl text-gray-300 mb-6">Your cart is empty</p>
+            <Link href="/products" className="bg-gray-900 text-white px-8 py-3 rounded-full hover:bg-[#c97a8f] transition text-sm uppercase tracking-widest">
+              Shop Now
             </Link>
           </div>
-        </div>
-      )}
+        ) : (
+          <div className="flex flex-col gap-6">
+            {items.map((item: any) => (
+              <div key={item._id} className="flex items-center justify-between py-6 border-b border-gray-100">
+                <div className="flex items-center gap-6">
+                  <div className="w-20 h-20 bg-[#faf7f4] rounded-xl flex items-center justify-center text-3xl">
+                    🧴
+                  </div>
+                  <div>
+                    <p className="font-serif text-lg">{item.product.name}</p>
+                    <p className="text-sm text-gray-400 mt-1">Qty: {item.quantity}</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-6">
+                  <p className="font-semibold text-lg">${item.product.price * item.quantity}</p>
+                  <button onClick={() => handleRemove(item.product._id)} className="text-gray-300 hover:text-red-400 transition">
+                    <Trash2 size={18} />
+                  </button>
+                </div>
+              </div>
+            ))}
+            <div className="flex justify-between items-center pt-8">
+              <div>
+                <p className="text-sm text-gray-400 uppercase tracking-widest">Total</p>
+                <p className="font-serif text-3xl">${total}</p>
+              </div>
+              <Link
+                href="/cart/checkout"
+                className="bg-gray-900 text-white px-10 py-4 rounded-full hover:bg-[#c97a8f] transition text-sm uppercase tracking-widest"
+              >
+                Checkout
+              </Link>
+            </div>
+          </div>
+        )}
+      </div>
     </main>
   )
 }
