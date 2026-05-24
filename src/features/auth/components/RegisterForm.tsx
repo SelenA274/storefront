@@ -29,13 +29,13 @@ export default function RegisterForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-full max-w-sm">
+    <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-full">
       <input
         name="name"
-        placeholder="Name"
+        placeholder="Full Name"
         value={form.name}
         onChange={handleChange}
-        className="border p-2 rounded"
+        className="border border-gray-200 p-4 rounded-xl focus:outline-none focus:border-[#c97a8f] transition"
         required
       />
       <input
@@ -44,7 +44,7 @@ export default function RegisterForm() {
         placeholder="Email"
         value={form.email}
         onChange={handleChange}
-        className="border p-2 rounded"
+        className="border border-gray-200 p-4 rounded-xl focus:outline-none focus:border-[#c97a8f] transition"
         required
       />
       <input
@@ -53,15 +53,15 @@ export default function RegisterForm() {
         placeholder="Password"
         value={form.password}
         onChange={handleChange}
-        className="border p-2 rounded"
+        className="border border-gray-200 p-4 rounded-xl focus:outline-none focus:border-[#c97a8f] transition"
         required
       />
       <button
         type="submit"
         disabled={loading}
-        className="bg-black text-white p-2 rounded hover:bg-gray-800 disabled:opacity-50"
+        className="bg-gray-900 text-white py-4 rounded-full hover:bg-[#c97a8f] transition text-sm uppercase tracking-widest disabled:opacity-50"
       >
-        {loading ? "Loading..." : "Register"}
+        {loading ? "Creating..." : "Create Account"}
       </button>
     </form>
   )

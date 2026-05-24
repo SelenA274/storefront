@@ -36,14 +36,14 @@ export default function LoginForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-full max-w-sm">
+    <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-full">
       <input
         name="email"
         type="email"
         placeholder="Email"
         value={form.email}
         onChange={handleChange}
-        className="border p-2 rounded"
+        className="border border-gray-200 p-4 rounded-xl focus:outline-none focus:border-[#c97a8f] transition"
         required
       />
       <input
@@ -52,16 +52,19 @@ export default function LoginForm() {
         placeholder="Password"
         value={form.password}
         onChange={handleChange}
-        className="border p-2 rounded"
+        className="border border-gray-200 p-4 rounded-xl focus:outline-none focus:border-[#c97a8f] transition"
         required
       />
+      <a href="/forgot-password" className="text-sm text-[#c9a96e] hover:underline text-right">
+        Forgot password?
+      </a>
       <button
         type="submit"
         disabled={loading}
-        className="bg-black text-white p-2 rounded hover:bg-gray-800 disabled:opacity-50"
+        className="bg-gray-900 text-white py-4 rounded-full hover:bg-[#c97a8f] transition text-sm uppercase tracking-widest disabled:opacity-50"
       >
         {loading ? "Loading..." : "Login"}
       </button>
     </form>
   )
-} 
+}
