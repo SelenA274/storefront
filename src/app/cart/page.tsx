@@ -7,7 +7,7 @@ import { cartService } from "@/features/cart/cartService"
 import { toast } from "react-toastify"
 import Link from "next/link"
 import { Trash2 } from "lucide-react"
-
+import Image from "next/image"
 
 export default function CartPage() {
   const dispatch = useAppDispatch()
@@ -31,14 +31,16 @@ export default function CartPage() {
     try {
       await cartService.removeItem(productId)
       const res = await cartService.getCart()
-      dispatch(setCart(res.data.data?.items || res.data.cart?.items || []));
-            toast.success("Item removed")
+      dispatch(setCart(res.data.data?.items || res.data.cart?.items || []))
+      toast.success("Item removed")
     } catch {
       toast.error("Failed to remove item")
     }
   }
 
-  const total = items.reduce((sum: any, item: any) => sum + item.product.price * item.quantity, 0)
+  const validItems = items.filter((item: any) => item.product)
+  const total = validItems.reduce((sum: number, item: any) => sum + item.product.price * item.quantity, 0)
+
   if (!isAuthenticated) return (
     <main className="flex min-h-screen items-center justify-center">
       <p>Please <Link href="/login" className="underline">login</Link> to view your cart.</p>
@@ -52,7 +54,7 @@ export default function CartPage() {
         <h1 className="font-serif text-5xl text-gray-900">Shopping Cart</h1>
       </div>
       <div className="max-w-4xl mx-auto px-8 py-16">
-        {items.length === 0 ? (
+        {validItems.length === 0 ? (
           <div className="text-center py-20">
             <p className="font-serif text-3xl text-gray-300 mb-6">Your cart is empty</p>
             <Link href="/products" className="bg-gray-900 text-white px-8 py-3 rounded-full hover:bg-[#c97a8f] transition text-sm uppercase tracking-widest">
@@ -61,11 +63,21 @@ export default function CartPage() {
           </div>
         ) : (
           <div className="flex flex-col gap-6">
-            {items.map((item: any) => (
+            {validItems.map((item: any) => (
               <div key={item._id} className="flex items-center justify-between py-6 border-b border-gray-100">
                 <div className="flex items-center gap-6">
-                  <div className="w-20 h-20 bg-[#faf7f4] rounded-xl flex items-center justify-center text-3xl">
-                    🧴
+                  <div className="w-20 h-20 bg-[#faf7f4] rounded-xl overflow-hidden flex items-center justify-center">
+                    {item.product.image ? (
+                      <Image
+                        src={item.product.image}
+                        alt={item.product.name}
+                        width={80}
+                        height={80}
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      <span className="text-3xl">🧴</span>
+                    )}
                   </div>
                   <div>
                     <p className="font-serif text-lg">{item.product.name}</p>

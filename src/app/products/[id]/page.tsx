@@ -55,8 +55,8 @@ export default function ProductPage() {
       </Link>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-16 mt-8">
         <div className="bg-[#faf7f4] rounded-3xl aspect-square flex items-center justify-center overflow-hidden">
-          {selectedProduct.image ? (
-            <img src={selectedProduct.image} alt={selectedProduct.name} className="w-full h-full object-cover rounded-3xl" />
+          {selectedProduct.images?.[0] ? (
+            <img src={selectedProduct.images[0]} alt={selectedProduct.name} className="w-full h-full object-cover rounded-3xl" />
           ) : (
             <p className="text-9xl">🧴</p>
           )}

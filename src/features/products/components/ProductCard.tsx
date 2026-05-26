@@ -4,7 +4,7 @@ interface Product {
   _id: string
   name: string
   price: number
-  image: string
+  images: string[]
   category: string
 }
 
@@ -13,9 +13,9 @@ export default function ProductCard({ product }: { product: Product }) {
     <Link href={`/products/${product._id}`}>
       <div className="group cursor-pointer">
         <div className="bg-[#faf7f4] rounded-2xl overflow-hidden aspect-square relative mb-4">
-          {product.image ? (
+          {product.images?.[0] ? (
             <img
-              src={product.image}
+              src={product.images[0]}
               alt={product.name}
               className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
             />
