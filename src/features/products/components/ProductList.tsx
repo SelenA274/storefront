@@ -11,9 +11,9 @@ import { toast } from "react-toastify"
 
 function getFilterSlug(searchParams: URLSearchParams): string | null {
   return (
-    searchParams.get("department") ||
     searchParams.get("subcategory") ||
-    searchParams.get("category")
+    searchParams.get("category") ||
+    searchParams.get("department")
   )
 }
 
