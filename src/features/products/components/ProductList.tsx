@@ -6,36 +6,45 @@ import { useAppDispatch, useAppSelector } from "@/store/hooks"
 import { setProducts, setLoading } from "../productSlice"
 import { productService } from "../productService"
 import ProductCard from "./ProductCard"
+import { formatSlug } from "../types"
 import { toast } from "react-toastify"
+
+function getFilterSlug(searchParams: URLSearchParams): string | null {
+  return (
+    searchParams.get("department") ||
+    searchParams.get("subcategory") ||
+    searchParams.get("category")
+  )
+}
 
 export default function ProductList() {
   const dispatch = useAppDispatch()
   const { products, loading } = useAppSelector((state) => state.products)
   const searchParams = useSearchParams()
-  const category = searchParams.get("category")
+  const filterSlug = getFilterSlug(searchParams)
 
   useEffect(() => {
     const fetchProducts = async () => {
       dispatch(setLoading(true))
       try {
-        const res = category
-          ? await productService.getByCategory(category)
+        const res = filterSlug
+          ? await productService.getByCategory(filterSlug)
           : await productService.getAll()
         dispatch(setProducts(res.data.data || res.data.products || res.data))
-      } catch (err: any) {
+      } catch {
         toast.error("Failed to load products")
       } finally {
         dispatch(setLoading(false))
       }
     }
     fetchProducts()
-  }, [dispatch, category])
+  }, [dispatch, filterSlug])
 
   if (loading) return <p className="text-center py-20 text-gray-400">Loading...</p>
   if (!products.length)
     return (
       <p className="text-center py-20 text-gray-400">
-        No products found{category ? ` in "${category}"` : ""}.
+        No products found{filterSlug ? ` in "${formatSlug(filterSlug)}"` : ""}.
       </p>
     )
 

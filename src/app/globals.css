@@ -32,3 +32,16 @@ h1, h2, h3 {
 .animate-fadeSlideUp {
   animation: fadeSlideUp 0.35s ease both;
 }
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+@keyframes scroll-left {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}

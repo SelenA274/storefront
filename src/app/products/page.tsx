@@ -1,14 +1,16 @@
 import { Suspense } from "react"
 import ProductList from "@/features/products/components/ProductList"
+import { formatSlug } from "@/features/products/types"
 
 interface Props {
-  searchParams: Promise<{ category?: string }>
+  searchParams: Promise<{ department?: string; subcategory?: string; category?: string }>
 }
 
 export default async function ProductsPage({ searchParams }: Props) {
-  const { category } = await searchParams
-  const title = category
-    ? `${category.charAt(0).toUpperCase() + category.slice(1)} Collection`
+  const params = await searchParams
+  const filterSlug = params.department || params.subcategory || params.category
+  const title = filterSlug
+    ? `${formatSlug(filterSlug)} Collection`
     : "Our Collection"
 
   return (

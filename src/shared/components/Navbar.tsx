@@ -4,6 +4,7 @@ import Link from "next/link"
 import { useAppDispatch, useAppSelector } from "@/store/hooks"
 import { clearUser } from "@/features/auth/authSlice"
 import { authService } from "@/features/auth/authService"
+import { DEPARTMENTS } from "@/features/products/types"
 import { toast } from "react-toastify"
 import { ShoppingCart, User, LogOut } from "lucide-react"
 
@@ -29,9 +30,15 @@ export default function Navbar() {
       </Link>
       <div className="hidden md:flex items-center gap-8 text-sm font-medium tracking-wider text-gray-600">
         <Link href="/products" className="hover:text-[#c97a8f] transition uppercase">Shop</Link>
-        <Link href="/products?category=makeup" className="hover:text-[#c97a8f] transition uppercase">Makeup</Link>
-        <Link href="/products?category=skincare" className="hover:text-[#c97a8f] transition uppercase">Skincare</Link>
-        <Link href="/products?category=fragrance" className="hover:text-[#c97a8f] transition uppercase">Fragrance</Link>
+        {DEPARTMENTS.map(({ slug, label }) => (
+          <Link
+            key={slug}
+            href={`/products?department=${slug}`}
+            className="hover:text-[#c97a8f] transition uppercase"
+          >
+            {label}
+          </Link>
+        ))}
       </div>
       <div className="flex items-center gap-5">
         <Link href="/cart" className="relative">

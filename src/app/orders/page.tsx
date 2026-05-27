@@ -71,7 +71,17 @@ export default function OrdersPage() {
               {data.items.map((item: any, index: number) => (
                 <div key={index} className="flex justify-between items-center py-4 border-b border-gray-100">
                   <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 bg-[#faf7f4] rounded-xl flex items-center justify-center text-2xl">🧴</div>
+                    <div className="w-12 h-12 bg-[#faf7f4] rounded-xl overflow-hidden flex items-center justify-center">
+                      {item.image ? (
+                        <img
+                          src={item.image}
+                          alt={item.name}
+                          className="w-full h-full object-cover"
+                        />
+                      ) : (
+                        <span className="text-2xl">🧴</span>
+                      )}
+                    </div>
                     <div>
                       <p className="font-medium">{item.name}</p>
                       <p className="text-sm text-gray-400">Qty: {item.quantity}</p>

@@ -7,7 +7,7 @@ import { cartService } from "@/features/cart/cartService"
 import { toast } from "react-toastify"
 import Link from "next/link"
 import { Trash2 } from "lucide-react"
-import Image from "next/image"
+import { getProductImage } from "@/features/products/types"
 
 export default function CartPage() {
   const dispatch = useAppDispatch()
@@ -63,13 +63,15 @@ export default function CartPage() {
           </div>
         ) : (
           <div className="flex flex-col gap-6">
-            {validItems.map((item: any) => (
+            {validItems.map((item: any) => {
+              const image = getProductImage(item.product)
+              return (
               <div key={item._id} className="flex items-center justify-between py-6 border-b border-gray-100">
                 <div className="flex items-center gap-6">
                   <div className="w-20 h-20 bg-[#faf7f4] rounded-xl overflow-hidden flex items-center justify-center">
-                    {item.product.image ? (
-                      <Image
-                        src={item.product.image}
+                    {image ? (
+                      <img
+                        src={image}
                         alt={item.product.name}
                         width={80}
                         height={80}
@@ -91,7 +93,7 @@ export default function CartPage() {
                   </button>
                 </div>
               </div>
-            ))}
+            )})}
             <div className="flex justify-between items-center pt-8">
               <div>
                 <p className="text-sm text-gray-400 uppercase tracking-widest">Total</p>

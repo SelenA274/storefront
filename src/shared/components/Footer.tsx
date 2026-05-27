@@ -1,4 +1,5 @@
 import Link from "next/link"
+import { DEPARTMENTS } from "@/features/products/types"
 
 export default function Footer() {
   return (
@@ -26,11 +27,18 @@ export default function Footer() {
         <div>
           <p className="text-xs uppercase tracking-widest text-gray-400 mb-4">Shop</p>
           <div className="flex flex-col gap-3">
-            {["Makeup", "Skincare", "Fragrance", "New Arrivals", "Sale"].map((item) => (
-              <Link key={item} href={`/products?category=${item.toLowerCase()}`} className="text-sm text-gray-600 hover:text-[#c97a8f] transition">
-                {item}
+            {DEPARTMENTS.map(({ slug, label }) => (
+              <Link
+                key={slug}
+                href={`/products?department=${slug}`}
+                className="text-sm text-gray-600 hover:text-[#c97a8f] transition"
+              >
+                {label}
               </Link>
             ))}
+            <Link href="/products" className="text-sm text-gray-600 hover:text-[#c97a8f] transition">
+              All Products
+            </Link>
           </div>
         </div>
         <div>
