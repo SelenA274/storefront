@@ -5,6 +5,11 @@ interface CartItem {
   _id: string
   product: CartProduct
   quantity: number
+  variant?: {
+    _id: string
+    sizeLabel?: string
+    colorName?: string
+  }
 }
 
 interface CartState {

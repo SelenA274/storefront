@@ -39,8 +39,9 @@ export default function CartPage() {
   }
 
   const validItems = items.filter((item: any) => item.product)
-  const total = validItems.reduce((sum: number, item: any) => sum + item.product.price * item.quantity, 0)
-
+  const total = validItems.reduce((sum: number, item: any) => 
+    sum + (item.variant?.price ?? item.product.price) * item.quantity, 0)
+  
   if (!isAuthenticated) return (
     <main className="flex min-h-screen items-center justify-center">
       <p>Please <Link href="/login" className="underline">login</Link> to view your cart.</p>
@@ -66,34 +67,43 @@ export default function CartPage() {
             {validItems.map((item: any) => {
               const image = getProductImage(item.product)
               return (
-              <div key={item._id} className="flex items-center justify-between py-6 border-b border-gray-100">
-                <div className="flex items-center gap-6">
-                  <div className="w-20 h-20 bg-[#faf7f4] rounded-xl overflow-hidden flex items-center justify-center">
-                    {image ? (
-                      <img
-                        src={image}
-                        alt={item.product.name}
-                        width={80}
-                        height={80}
-                        className="w-full h-full object-cover"
-                      />
-                    ) : (
-                      <span className="text-3xl">🧴</span>
-                    )}
+                <div key={item._id} className="flex items-center justify-between py-6 border-b border-gray-100">
+                  <div className="flex items-center gap-6">
+                    <div className="w-20 h-20 bg-[#faf7f4] rounded-xl overflow-hidden flex items-center justify-center">
+                      {image ? (
+                        <img
+                          src={image}
+                          alt={item.product.name}
+                          width={80}
+                          height={80}
+                          className="w-full h-full object-cover"
+                        />
+                      ) : (
+                        <span className="text-3xl">🧴</span>
+                      )}
+                    </div>
+                    <div>
+                      <p className="font-serif text-lg">{item.product.name}</p>
+                      {item.variant?.sizeLabel && (
+                        <p className="text-xs text-gray-400">{item.variant.sizeLabel}</p>
+                      )}
+                      {item.variant?.colorName && (
+                        <p className="text-xs text-gray-400">{item.variant.colorName}</p>
+                      )}
+                      <p className="text-sm text-gray-400 mt-1">Qty: {item.quantity}</p>
+                    </div>
                   </div>
-                  <div>
-                    <p className="font-serif text-lg">{item.product.name}</p>
-                    <p className="text-sm text-gray-400 mt-1">Qty: {item.quantity}</p>
+                  <div className="flex items-center gap-6">
+                    <p className="font-semibold text-lg">
+                      ${((item.variant?.price ?? item.product.price) * item.quantity).toFixed(0)}
+                    </p>
+                    <button onClick={() => handleRemove(item.product._id)} className="text-gray-300 hover:text-red-400 transition">
+                      <Trash2 size={18} />
+                    </button>
                   </div>
                 </div>
-                <div className="flex items-center gap-6">
-                  <p className="font-semibold text-lg">${item.product.price * item.quantity}</p>
-                  <button onClick={() => handleRemove(item.product._id)} className="text-gray-300 hover:text-red-400 transition">
-                    <Trash2 size={18} />
-                  </button>
-                </div>
-              </div>
-            )})}
+              )
+            })}
             <div className="flex justify-between items-center pt-8">
               <div>
                 <p className="text-sm text-gray-400 uppercase tracking-widest">Total</p>

@@ -8,6 +8,7 @@ import { authService } from "@/features/auth/authService"
 import { DEPARTMENTS } from "@/features/products/types"
 import { toast } from "react-toastify"
 import { ShoppingCart, User, LogOut } from "lucide-react"
+import { clearCart } from "@/features/cart/cartSlice"
 
 const SUBCATEGORIES: Record<string, string[]> = {
   makeup: ["lips", "face", "eyes", "brows", "tools"],
@@ -27,6 +28,7 @@ export default function Navbar() {
     try {
       await authService.logout()
       dispatch(clearUser())
+      dispatch(clearCart())
       toast.success("Logged out")
     } catch {
       toast.error("Logout failed")
@@ -103,7 +105,7 @@ export default function Navbar() {
             <ShoppingCart size={18} className="text-gray-700 hover:text-[#c97a8f] transition-colors" />
             {items.length > 0 && (
               <span className="absolute -top-2 -right-2 bg-[#c97a8f] text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">
-                {items.length}
+                {items.reduce((sum, item) => sum + item.quantity, 0)}
               </span>
             )}
           </Link>
