@@ -25,8 +25,10 @@ export default function LoginForm() {
       const token = res.data.data
       localStorage.setItem("token", token)
       const meRes = await authService.me()
+      console.log(meRes.data.data)
       dispatch(setUser(meRes.data.data))
       toast.success("Welcome back!")
+
       router.push("/")
     } catch (err: any) {
       toast.error(err.response?.data?.message || "Login failed")

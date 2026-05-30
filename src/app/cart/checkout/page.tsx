@@ -31,7 +31,7 @@ export default function CheckoutPage() {
     setLoading(true)
     try {
       await api.post("/order", {
-        items: items.map((i: any) => ({ product: i.product._id, quantity: i.quantity })),
+        items: items.filter((i: any) => i.product).map((i: any) => ({ product: i.product._id, quantity: i.quantity })),
         shippingAddress: {
           fullName: address.fullName,
           phone: address.phone,
@@ -97,7 +97,7 @@ export default function CheckoutPage() {
         <div>
           <h2 className="font-serif text-2xl mb-6">Order Summary</h2>
           <div className="flex flex-col gap-4">
-            {items.map((item: any) => (
+          {items.filter((item: any) => item.product).map((item: any) => (
               <div key={item._id} className="flex justify-between py-3 border-b border-gray-100">
                 <div>
                   <p className="font-medium">{item.product.name}</p>

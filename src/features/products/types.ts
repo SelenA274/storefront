@@ -7,6 +7,14 @@ export type Department =
 
 export type VariantKind = "color" | "size"
 
+export interface IRating {
+  _id: string
+  user: { _id: string; name: string; avatar?: string } | string
+  rating: number
+  comment?: string
+  createdAt: string
+}
+
 export interface ColorVariant {
   _id: string
   colorName: string
@@ -41,7 +49,7 @@ export interface Product {
   sold: number
   isActive: boolean
   averageRating: number
-  ratings: number[]
+  ratings: IRating[]
   createdAt: string
   updatedAt: string
 }
