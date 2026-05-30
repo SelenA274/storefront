@@ -12,7 +12,7 @@ import type { ProductVariant, IRating } from "@/features/products/types"
 import { toast } from "react-toastify"
 import Link from "next/link"
 import { isColorVariant } from "@/features/products/types"
-
+import { useProductSocket } from "@/hooks/useProductSocket"
 
 function StarRating({ average, count }: { average: number; count: number }) {
   return (
@@ -42,9 +42,8 @@ function Stars({
           type="button"
           disabled={!interactive}
           onClick={() => onSelect?.(i + 1)}
-          className={`text-2xl transition ${
-            i < value ? "text-amber-400" : "text-gray-300"
-          } ${interactive ? "hover:text-amber-300 cursor-pointer" : "cursor-default"}`}
+          className={`text-2xl transition ${i < value ? "text-amber-400" : "text-gray-300"
+            } ${interactive ? "hover:text-amber-300 cursor-pointer" : "cursor-default"}`}
         >
           ★
         </button>
@@ -53,7 +52,7 @@ function Stars({
   )
 }
 
-// ─── Reviews section ──────────────────────────────────────────────────────────
+
 
 function ReviewsSection({
   productId,
@@ -181,6 +180,21 @@ export default function ProductPage() {
   const [selectedVariant, setSelectedVariant] = useState<ProductVariant | null>(null)
   const [activeImage, setActiveImage] = useState<string | null>(null)
 
+
+  useProductSocket(
+    id as string,
+    (newStock) => {
+        if (selectedProduct) {
+            dispatch(setSelectedProduct({ ...selectedProduct, totalStock: newStock }))
+        }
+    },
+    () => {
+        if (selectedProduct) {
+            dispatch(setSelectedProduct({ ...selectedProduct, totalStock: 0 }))
+        }
+    }
+)
+  
   const fetchProduct = async () => {
     dispatch(setLoading(true))
     try {
@@ -210,8 +224,8 @@ export default function ProductPage() {
     try {
       const variantId = selectedVariant && !isColorVariant(selectedVariant)
         ? selectedProduct?.variants.find(
-            (v) => !isColorVariant(v) && (v as any).sizeLabel === (selectedVariant as any).sizeLabel
-          )?._id
+          (v) => !isColorVariant(v) && (v as any).sizeLabel === (selectedVariant as any).sizeLabel
+        )?._id
         : selectedVariant?._id
 
       await cartService.addToCart(id as string, qty, variantId as string | undefined)
@@ -272,9 +286,8 @@ export default function ProductPage() {
                   <button
                     key={i}
                     onClick={() => setActiveImage(img)}
-                    className={`w-20 h-20 rounded-xl overflow-hidden border-2 transition ${
-                      activeImage === img ? "border-gray-900" : "border-transparent"
-                    }`}
+                    className={`w-20 h-20 rounded-xl overflow-hidden border-2 transition ${activeImage === img ? "border-gray-900" : "border-transparent"
+                      }`}
                   >
                     <img src={img} alt="" className="w-full h-full object-cover" />
                   </button>
