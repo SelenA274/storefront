@@ -6,6 +6,7 @@ import { gsap } from "gsap"
 import { useGSAP } from "@gsap/react"
 import SplitText from "../shared/components/SplitText"
 import BorderGlow from "../shared/components/BorderGlow"
+import FeaturedCarousel  from "../shared/components/FeaturedCarousel"
 
 gsap.registerPlugin()
 
@@ -150,6 +151,7 @@ export default function HeroSection() {
           ))}
         </div>
       </section>
+      <FeaturedCarousel/>
     </>
   )
 }
