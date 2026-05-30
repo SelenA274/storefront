@@ -27,6 +27,7 @@ export default function Navbar() {
   const handleLogout = async () => {
     try {
       await authService.logout()
+      localStorage.removeItem("token") 
       dispatch(clearUser())
       dispatch(clearCart())
       toast.success("Logged out")
@@ -34,7 +35,6 @@ export default function Navbar() {
       toast.error("Logout failed")
     }
   }
-
   return (
     <header className="sticky top-0 z-50 bg-[#faf7f4]">
       <div

@@ -6,6 +6,7 @@ import { setUser } from "@/features/auth/authSlice"
 import api from "@/lib/axios"
 import { toast } from "react-toastify"
 import Link from "next/link"
+import { MapPin, User, Mail, Crown, Calendar, Plus, Pencil, Trash2, X, Check, ShoppingBag } from "lucide-react"
 
 interface Address {
   _id?: string
@@ -13,6 +14,49 @@ interface Address {
   street: string
   zipCode: string
   country: string
+}
+
+const gold = "#c9a96e"
+const goldLight = "rgba(201,169,110,0.15)"
+const goldBorder = "rgba(201,169,110,0.25)"
+
+const glassCard = {
+  background: "rgba(255,255,255,0.6)",
+  backdropFilter: "blur(20px)",
+  WebkitBackdropFilter: "blur(20px)",
+  borderRadius: "32px",
+  border: `1px solid ${goldBorder}`,
+  boxShadow: "0 8px 40px rgba(180,150,100,0.10), 0 2px 8px rgba(0,0,0,0.04)",
+  padding: "40px",
+}
+
+const luxuryInput = {
+  width: "100%",
+  border: `1.5px solid ${goldBorder}`,
+  borderRadius: "14px",
+  padding: "13px 16px",
+  fontSize: "0.88rem",
+  background: "rgba(255,255,255,0.8)",
+  color: "#2a1f14",
+  boxSizing: "border-box" as const,
+  fontFamily: "sans-serif",
+  transition: "border-color 0.2s, box-shadow 0.2s",
+}
+
+const goldBtn = {
+  background: "linear-gradient(135deg, #c9a96e, #a8803d)",
+  color: "#fff",
+  border: "none",
+  borderRadius: "50px",
+  padding: "12px 28px",
+  fontSize: "0.75rem",
+  fontFamily: "sans-serif",
+  fontWeight: 600,
+  letterSpacing: "0.18em",
+  textTransform: "uppercase" as const,
+  cursor: "pointer",
+  boxShadow: "0 4px 16px rgba(201,169,110,0.30)",
+  transition: "all 0.25s ease",
 }
 
 export default function ProfilePage() {
@@ -24,25 +68,22 @@ export default function ProfilePage() {
   const [addingAddress, setAddingAddress] = useState(false)
   const [savingInfo, setSavingInfo] = useState(false)
   const [savingAddress, setSavingAddress] = useState(false)
-
   const [name, setName] = useState(user?.name ?? "")
 
   const emptyAddress: Address = { city: "", street: "", zipCode: "", country: "" }
   const [addressForm, setAddressForm] = useState<Address>(emptyAddress)
 
   if (!isAuthenticated) return (
-    <main className="flex min-h-screen items-center justify-center">
-      <div className="text-center">
-        <p className="font-serif text-2xl mb-4">Please login to view your profile</p>
-        <Link href="/login" className="bg-gray-900 text-white px-8 py-3 rounded-full hover:bg-[#c97a8f] transition text-sm uppercase tracking-widest">
-          Login
-        </Link>
+    <main style={{ minHeight: "100vh", background: "linear-gradient(135deg, #faf7f2 0%, #efe7da 100%)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+      <div style={{ textAlign: "center" }}>
+        <p style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.8rem", color: "#2a1f14", marginBottom: "24px" }}>Please sign in to view your account</p>
+        <Link href="/login" style={{ ...goldBtn, textDecoration: "none", padding: "14px 36px" }}>Sign In</Link>
       </div>
     </main>
   )
 
   const joinDate = user?.createdAt
-    ? new Date(user.createdAt).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })
+    ? new Date(user.createdAt).toLocaleDateString("en-US", { year: "numeric", month: "long" })
     : null
 
   const handleSaveInfo = async () => {
@@ -62,7 +103,6 @@ export default function ProfilePage() {
   const handleSaveAddress = async () => {
     setSavingAddress(true)
     try {
-
       if (editingAddress) {
         await api.put(`/users/addresses/${editingAddress}`, addressForm)
       } else {
@@ -93,130 +133,174 @@ export default function ProfilePage() {
   }
 
   const addresses: Address[] = (user as any)?.addresses ?? []
-  console.log(user)
+
   return (
-    <main>
-      <div className="bg-[#fde8ed] py-16 text-center">
-        <p className="text-[#c9a96e] text-sm tracking-[0.3em] uppercase mb-3">Welcome!</p>
-        <h1 className="font-serif text-5xl text-gray-900">{user?.name}</h1>
+    <main style={{ minHeight: "100vh", background: "linear-gradient(160deg, #faf7f2 0%, #f2ebe0 50%, #ede4d3 100%)", fontFamily: "sans-serif", position: "relative", overflow: "hidden" }}>
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap');
+        .lux-input:focus { outline: none; border-color: #c9a96e !important; box-shadow: 0 0 0 3px rgba(201,169,110,0.12) !important; }
+        .lux-input::placeholder { color: #c8b99a; }
+        .gold-btn-hover:hover { background: linear-gradient(135deg, #d4b87a, #b8904a) !important; box-shadow: 0 8px 24px rgba(201,169,110,0.4) !important; transform: translateY(-1px); }
+        .ghost-btn:hover { color: #2a1f14 !important; }
+        .addr-card:hover { border-color: rgba(201,169,110,0.4) !important; box-shadow: 0 4px 20px rgba(201,169,110,0.10) !important; }
+        .icon-btn:hover { color: #c9a96e !important; }
+      `}</style>
+
+      {/* Decorative circles */}
+      <div style={{ position: "fixed", top: "-120px", right: "-120px", width: "500px", height: "500px", borderRadius: "50%", background: "radial-gradient(circle, rgba(201,169,110,0.14) 0%, transparent 70%)", filter: "blur(50px)", pointerEvents: "none", zIndex: 0 }} />
+      <div style={{ position: "fixed", bottom: "-150px", left: "-150px", width: "600px", height: "600px", borderRadius: "50%", background: "radial-gradient(circle, rgba(201,169,110,0.10) 0%, transparent 70%)", filter: "blur(70px)", pointerEvents: "none", zIndex: 0 }} />
+
+      {/* Hero Header */}
+      <div style={{
+        background: "linear-gradient(135deg, rgba(255,255,255,0.7) 0%, rgba(245,235,215,0.6) 100%)",
+        backdropFilter: "blur(20px)",
+        borderBottom: `1px solid ${goldBorder}`,
+        padding: "60px 24px",
+        textAlign: "center",
+        position: "relative",
+        zIndex: 1,
+      }}>
+        {/* Avatar */}
+        <div style={{
+          width: "88px", height: "88px", borderRadius: "50%",
+          background: "linear-gradient(135deg, #f5e6cc, #e8d0a0)",
+          display: "flex", alignItems: "center", justifyContent: "center",
+          margin: "0 auto 20px",
+          boxShadow: "0 8px 32px rgba(201,169,110,0.30), 0 0 0 4px rgba(201,169,110,0.15)",
+          fontSize: "2.2rem",
+          fontFamily: "'Playfair Display', serif",
+          color: gold,
+          fontWeight: 600,
+        }}>
+          {user?.name?.charAt(0).toUpperCase()}
+        </div>
+
+        <p style={{ fontSize: "0.7rem", letterSpacing: "0.35em", textTransform: "uppercase", color: gold, marginBottom: "8px", fontWeight: 500 }}>
+          Welcome 
+        </p>
+        <h1 style={{ fontFamily: "'Playfair Display', serif", fontSize: "2.8rem", fontWeight: 500, color: "#2a1f14", margin: "0 0 8px", lineHeight: 1.2 }}>
+          {user?.name}
+        </h1>
+        
       </div>
 
-      <div className="max-w-2xl mx-auto px-8 py-16 flex flex-col gap-6">
+      {/* Content */}
+      <div style={{ maxWidth: "680px", margin: "0 auto", padding: "48px 24px", display: "flex", flexDirection: "column", gap: "24px", position: "relative", zIndex: 1 }}>
 
-        {/* ── Personal Info ── */}
-        <div className="bg-[#faf7f4] rounded-2xl p-8">
-          <div className="flex items-center justify-between mb-6">
-            <p className="text-xs uppercase tracking-widest text-[#c9a96e]">Personal Info</p>
+        {/* Personal Info Card */}
+        <div style={glassCard}>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "28px" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+              <div style={{ width: "32px", height: "32px", borderRadius: "50%", background: goldLight, display: "flex", alignItems: "center", justifyContent: "center" }}>
+                <User size={14} color={gold} />
+              </div>
+              <span style={{ fontSize: "0.68rem", letterSpacing: "0.3em", textTransform: "uppercase", color: gold, fontWeight: 600 }}>Personal Info</span>
+            </div>
             {!editingInfo && (
-              <button
-                onClick={() => setEditingInfo(true)}
-                className="text-xs uppercase tracking-widest text-gray-400 hover:text-gray-900 transition"
-              >
-                Edit
+              <button className="ghost-btn" onClick={() => setEditingInfo(true)} style={{ background: "none", border: "none", cursor: "pointer", display: "flex", alignItems: "center", gap: "6px", color: "#b0a090", fontSize: "0.75rem", letterSpacing: "0.12em", textTransform: "uppercase", transition: "color 0.2s" }}>
+                <Pencil size={12} /> Edit
               </button>
             )}
           </div>
 
-          <div className="flex items-center gap-6 mb-6">
-            <div className="w-16 h-16 rounded-full bg-[#fde8ed] flex items-center justify-center shrink-0">
-              <span className="font-serif text-2xl text-[#c97a8f]">
-                {user?.name?.charAt(0).toUpperCase()}
-              </span>
-            </div>
-            <div className="flex-1">
-              {editingInfo ? (
-                <input
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  className="border border-gray-200 rounded-xl px-4 py-2 text-sm w-full focus:outline-none focus:border-[#c97a8f] transition"
-                />
-              ) : (
-                <p className="font-serif text-xl">{user?.name}</p>
-              )}
-              <p className="text-gray-400 text-sm mt-1">{user?.email}</p>
-            </div>
-          </div>
+          <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
 
-          <div className="flex flex-col gap-3 border-t border-gray-200 pt-5">
-            <div className="flex justify-between">
-              <p className="text-gray-400 text-sm uppercase tracking-widest">Role</p>
-              <p className="text-sm font-medium capitalize">{user?.role}</p>
+
+            <div style={{ display: "flex", alignItems: "center", gap: "12px", padding: "16px", background: "rgba(255,255,255,0.5)", borderRadius: "16px", border: `1px solid ${goldBorder}` }}>
+              <User size={15} color={gold} style={{ flexShrink: 0 }} />
+              {editingInfo ? (
+                <input value={name} onChange={(e) => setName(e.target.value)} className="lux-input" style={{ ...luxuryInput, padding: "8px 12px" }} />
+              ) : (
+                <div>
+                  <p style={{ fontSize: "0.7rem", color: "#b0a090", textTransform: "uppercase", letterSpacing: "0.15em", margin: "0 0 2px" }}>Full Name</p>
+                  <p style={{ fontSize: "0.95rem", color: "#2a1f14", margin: 0, fontFamily: "'Playfair Display', serif" }}>{user?.name}</p>
+                </div>
+              )}
             </div>
-            {joinDate && (
-              <div className="flex justify-between">
-                <p className="text-gray-400 text-sm uppercase tracking-widest">Member since</p>
-                <p className="text-sm font-medium">{joinDate}</p>
+
+
+            <div style={{ display: "flex", alignItems: "center", gap: "12px", padding: "16px", background: "rgba(255,255,255,0.5)", borderRadius: "16px", border: `1px solid ${goldBorder}` }}>
+              <Mail size={15} color={gold} style={{ flexShrink: 0 }} />
+              <div>
+                <p style={{ fontSize: "0.7rem", color: "#b0a090", textTransform: "uppercase", letterSpacing: "0.15em", margin: "0 0 2px" }}>Email</p>
+                <p style={{ fontSize: "0.95rem", color: "#2a1f14", margin: 0 }}>{user?.email}</p>
               </div>
-            )}
+            </div>
+
+            {/* Role + Member Since */}
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: "12px", padding: "16px", background: "rgba(255,255,255,0.5)", borderRadius: "16px", border: `1px solid ${goldBorder}` }}>
+                <Crown size={15} color={gold} style={{ flexShrink: 0 }} />
+                <div>
+                  <p style={{ fontSize: "0.65rem", color: "#b0a090", textTransform: "uppercase", letterSpacing: "0.15em", margin: "0 0 2px" }}>Role</p>
+                  <p style={{ fontSize: "0.88rem", color: "#2a1f14", margin: 0, textTransform: "capitalize" }}>{user?.role}</p>
+                </div>
+              </div>
+              {joinDate && (
+                <div style={{ display: "flex", alignItems: "center", gap: "12px", padding: "16px", background: "rgba(255,255,255,0.5)", borderRadius: "16px", border: `1px solid ${goldBorder}` }}>
+                  <Calendar size={15} color={gold} style={{ flexShrink: 0 }} />
+                  <div>
+                    <p style={{ fontSize: "0.65rem", color: "#b0a090", textTransform: "uppercase", letterSpacing: "0.15em", margin: "0 0 2px" }}>Member Since</p>
+                    <p style={{ fontSize: "0.88rem", color: "#2a1f14", margin: 0 }}>{joinDate}</p>
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
 
           {editingInfo && (
-            <div className="flex gap-3 mt-6">
-              <button
-                onClick={handleSaveInfo}
-                disabled={savingInfo}
-                className="bg-gray-900 text-white text-sm uppercase tracking-widest px-6 py-3 rounded-full hover:bg-[#c97a8f] transition disabled:opacity-40"
-              >
-                {savingInfo ? "Saving…" : "Save"}
+            <div style={{ display: "flex", gap: "12px", marginTop: "20px" }}>
+              <button className="gold-btn-hover" onClick={handleSaveInfo} disabled={savingInfo} style={{ ...goldBtn, opacity: savingInfo ? 0.5 : 1 }}>
+                {savingInfo ? "Saving…" : "Save Changes"}
               </button>
-              <button
-                onClick={() => { setEditingInfo(false); setName(user?.name ?? "") }}
-                className="text-sm uppercase tracking-widest text-gray-400 hover:text-gray-900 transition px-6 py-3"
-              >
+              <button className="ghost-btn" onClick={() => { setEditingInfo(false); setName(user?.name ?? "") }} style={{ background: "none", border: "none", cursor: "pointer", color: "#b0a090", fontSize: "0.75rem", letterSpacing: "0.12em", textTransform: "uppercase", transition: "color 0.2s" }}>
                 Cancel
               </button>
             </div>
           )}
         </div>
 
-        {/* ── Addresses ── */}
-        <div className="bg-[#faf7f4] rounded-2xl p-8">
-          <div className="flex items-center justify-between mb-6">
-            <p className="text-xs uppercase tracking-widest text-[#c9a96e]">Addresses</p>
+
+        <div style={glassCard}>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "28px" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+              <div style={{ width: "32px", height: "32px", borderRadius: "50%", background: goldLight, display: "flex", alignItems: "center", justifyContent: "center" }}>
+                <MapPin size={14} color={gold} />
+              </div>
+              <span style={{ fontSize: "0.68rem", letterSpacing: "0.3em", textTransform: "uppercase", color: gold, fontWeight: 600 }}>Addresses</span>
+            </div>
             {!addingAddress && !editingAddress && (
-              <button
-                onClick={() => { setAddingAddress(true); setAddressForm(emptyAddress) }}
-                className="text-xs uppercase tracking-widest text-gray-400 hover:text-gray-900 transition"
-              >
-                + Add
+              <button className="ghost-btn" onClick={() => { setAddingAddress(true); setAddressForm(emptyAddress) }} style={{ background: "none", border: "none", cursor: "pointer", display: "flex", alignItems: "center", gap: "6px", color: "#b0a090", fontSize: "0.75rem", letterSpacing: "0.12em", textTransform: "uppercase", transition: "color 0.2s" }}>
+                <Plus size={12} /> Add
               </button>
             )}
           </div>
 
           {addresses.length === 0 && !addingAddress && (
-            <p className="text-gray-400 text-sm">No addresses saved yet.</p>
+            <p style={{ fontSize: "0.88rem", color: "#b0a090", textAlign: "center", padding: "24px 0" }}>No addresses saved yet.</p>
           )}
 
-          <div className="flex flex-col gap-4">
+          <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
             {addresses.map((addr: any) => (
-              <div key={addr._id} className="border border-gray-100 rounded-xl p-4">
+              <div key={addr._id} className="addr-card" style={{ border: `1px solid ${goldBorder}`, borderRadius: "20px", padding: "20px", transition: "all 0.2s", background: "rgba(255,255,255,0.5)" }}>
                 {editingAddress === addr._id ? (
-                  <AddressForm
-                    form={addressForm}
-                    onChange={setAddressForm}
-                    onSave={handleSaveAddress}
-                    onCancel={() => { setEditingAddress(null); setAddressForm(emptyAddress) }}
-                    saving={savingAddress}
-                  />
+                  <AddressForm form={addressForm} onChange={setAddressForm} onSave={handleSaveAddress} onCancel={() => { setEditingAddress(null); setAddressForm(emptyAddress) }} saving={savingAddress} />
                 ) : (
-                  <div className="flex justify-between items-start">
-                    <div className="text-sm text-gray-600 leading-relaxed">
-                      <p>{addr.street}</p>
-                      <p>{addr.city}, {addr.zipCode}</p>
-                      <p>{addr.country}</p>
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
+                    <div style={{ display: "flex", gap: "12px" }}>
+                      <MapPin size={15} color={gold} style={{ marginTop: "2px", flexShrink: 0 }} />
+                      <div style={{ fontSize: "0.88rem", color: "#5a4a3a", lineHeight: 1.7 }}>
+                        <p style={{ margin: 0 }}>{addr.street}</p>
+                        <p style={{ margin: 0 }}>{addr.city}, {addr.zipCode}</p>
+                        <p style={{ margin: 0, color: "#9a8870" }}>{addr.country}</p>
+                      </div>
                     </div>
-                    <div className="flex gap-3 text-xs text-gray-400">
-                      <button
-                        onClick={() => { setEditingAddress(addr._id); setAddressForm(addr) }}
-                        className="hover:text-gray-900 transition uppercase tracking-widest"
-                      >
-                        Edit
+                    <div style={{ display: "flex", gap: "12px" }}>
+                      <button className="icon-btn" onClick={() => { setEditingAddress(addr._id); setAddressForm(addr) }} style={{ background: "none", border: "none", cursor: "pointer", color: "#c8b99a", transition: "color 0.2s", padding: "4px" }}>
+                        <Pencil size={14} />
                       </button>
-                      <button
-                        onClick={() => handleDeleteAddress(addr._id)}
-                        className="hover:text-red-400 transition uppercase tracking-widest"
-                      >
-                        Remove
+                      <button className="icon-btn" onClick={() => handleDeleteAddress(addr._id)} style={{ background: "none", border: "none", cursor: "pointer", color: "#c8b99a", transition: "color 0.2s", padding: "4px" }}>
+                        <Trash2 size={14} />
                       </button>
                     </div>
                   </div>
@@ -225,26 +309,28 @@ export default function ProfilePage() {
             ))}
 
             {addingAddress && (
-              <div className="border border-gray-100 rounded-xl p-4">
-                <AddressForm
-                  form={addressForm}
-                  onChange={setAddressForm}
-                  onSave={handleSaveAddress}
-                  onCancel={() => { setAddingAddress(false); setAddressForm(emptyAddress) }}
-                  saving={savingAddress}
-                />
+              <div style={{ border: `1px solid ${goldBorder}`, borderRadius: "20px", padding: "20px", background: "rgba(255,255,255,0.5)" }}>
+                <AddressForm form={addressForm} onChange={setAddressForm} onSave={handleSaveAddress} onCancel={() => { setAddingAddress(false); setAddressForm(emptyAddress) }} saving={savingAddress} />
               </div>
             )}
           </div>
         </div>
 
-        {/* ── Orders link ── */}
-        <Link
-          href="/orders"
-          className="bg-gray-900 text-white text-center py-4 rounded-full hover:bg-[#c97a8f] transition text-sm uppercase tracking-widest"
-        >
+        <Link href="/orders" className="gold-btn-hover" style={{
+          ...goldBtn,
+          textDecoration: "none",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: "10px",
+          padding: "18px",
+          borderRadius: "20px",
+          fontSize: "0.78rem",
+        }}>
+          <ShoppingBag size={16} />
           View My Orders
         </Link>
+
       </div>
     </main>
   )
@@ -258,34 +344,41 @@ function AddressForm({ form, onChange, onSave, onCancel, saving }: {
   saving: boolean
 }) {
   const fields = [
-    { key: "street", placeholder: "Street" },
-    { key: "city", placeholder: "City" },
-    { key: "zipCode", placeholder: "ZIP Code" },
-    { key: "country", placeholder: "Country" },
+    { key: "street", placeholder: "Street address", icon: "📍" },
+    { key: "city", placeholder: "City", icon: "🏙" },
+    { key: "zipCode", placeholder: "ZIP / Postal code", icon: "📮" },
+    { key: "country", placeholder: "Country", icon: "🌍" },
   ]
+
   return (
-    <div className="flex flex-col gap-3">
+    <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
       {fields.map((f) => (
         <input
           key={f.key}
           placeholder={f.placeholder}
           value={(form as any)[f.key]}
           onChange={(e) => onChange({ ...form, [f.key]: e.target.value })}
-          className="border border-gray-200 rounded-xl px-4 py-2 text-sm focus:outline-none focus:border-[#c97a8f] transition"
+          className="lux-input"
+          style={{
+            width: "100%", border: "1.5px solid rgba(201,169,110,0.25)", borderRadius: "12px",
+            padding: "12px 16px", fontSize: "0.88rem",
+            background: "rgba(255,255,255,0.8)", color: "#2a1f14",
+            boxSizing: "border-box" as const, fontFamily: "sans-serif",
+            transition: "border-color 0.2s, box-shadow 0.2s",
+          }}
         />
       ))}
-      <div className="flex gap-3 mt-1">
-        <button
-          onClick={onSave}
-          disabled={saving}
-          className="bg-gray-900 text-white text-sm uppercase tracking-widest px-6 py-2 rounded-full hover:bg-[#c97a8f] transition disabled:opacity-40"
-        >
+      <div style={{ display: "flex", gap: "12px", marginTop: "6px" }}>
+        <button className="gold-btn-hover" onClick={onSave} disabled={saving} style={{
+          background: "linear-gradient(135deg, #c9a96e, #a8803d)", color: "#fff", border: "none",
+          borderRadius: "50px", padding: "11px 24px", fontSize: "0.72rem", fontFamily: "sans-serif",
+          fontWeight: 600, letterSpacing: "0.15em", textTransform: "uppercase" as const,
+          cursor: saving ? "not-allowed" : "pointer", opacity: saving ? 0.5 : 1,
+          boxShadow: "0 4px 14px rgba(201,169,110,0.28)", transition: "all 0.25s ease",
+        }}>
           {saving ? "Saving…" : "Save"}
         </button>
-        <button
-          onClick={onCancel}
-          className="text-sm uppercase tracking-widest text-gray-400 hover:text-gray-900 transition"
-        >
+        <button onClick={onCancel} style={{ background: "none", border: "none", cursor: "pointer", color: "#b0a090", fontSize: "0.72rem", letterSpacing: "0.12em", textTransform: "uppercase" as const, transition: "color 0.2s" }}>
           Cancel
         </button>
       </div>
