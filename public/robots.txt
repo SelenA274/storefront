@@ -1,9 +1,0 @@
-User-agent: *
-Allow: /
-
-Disallow: /cart
-Disallow: /orders
-Disallow: /profile
-Disallow: /checkout
-
-Sitemap: https://velo-store.vercel.app/sitemap.xml

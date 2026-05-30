@@ -16,6 +16,8 @@ const inter = Inter({
   variable: "--font-inter",
 })
 
+
+
 export const metadata: Metadata = {
   title: {
     default: "VELO — Luxury Beauty & Fragrance",
@@ -30,7 +32,8 @@ export const metadata: Metadata = {
     siteName: "VELO",
     title: "VELO — Luxury Beauty & Fragrance",
     description: "Discover luxury makeup, skincare, and fragrances at VELO.",
-  },
+    url: process.env.NEXT_PUBLIC_SITE_URL,
+},
   twitter: {
     card: "summary_large_image",
     title: "VELO — Luxury Beauty & Fragrance",
