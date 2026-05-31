@@ -66,7 +66,7 @@ export default function OrdersPage() {
           <div className="flex flex-col gap-8">
             {orders.map((order: any, i: number) => (
               <div key={order._id} className="bg-[#faf7f4] rounded-2xl p-6">
-                {/* Order header */}
+
                 <div className="flex items-center justify-between mb-4">
                   <div>
                     <p className="text-[#c9a96e] text-xs uppercase tracking-widest mb-1">
@@ -83,7 +83,7 @@ export default function OrdersPage() {
                   </span>
                 </div>
 
-                {/* Items */}
+
                 <div className="flex flex-col gap-3 mb-4">
                   {order.items.map((item: any, j: number) => (
                     <div key={j} className="flex justify-between items-center py-3 border-b border-gray-100 last:border-0">
@@ -105,7 +105,7 @@ export default function OrdersPage() {
                   ))}
                 </div>
 
-                {/* Order total */}
+
                 <div className="flex justify-between pt-3 border-t border-gray-200">
                   <p className="font-serif text-lg">Total</p>
                   <p className="font-serif text-lg">${order.totalPrice}</p>

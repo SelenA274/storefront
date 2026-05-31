@@ -57,14 +57,11 @@ export default function HeroSection() {
 
   return (
     <>
-      {/* ─── Hero ─── */}
       <section className="relative bg-[#faf7f4] min-h-[90vh] flex items-center px-4 sm:px-6 lg:px-8 py-12 md:py-16 overflow-hidden">
         <div className="max-w-7xl mx-auto w-full">
 
-          {/* Outer wrapper: stack on mobile, side-by-side on lg+ */}
           <div className="flex flex-col lg:flex-row lg:items-center lg:gap-10">
 
-            {/* ── BorderGlow card ── */}
             <div className="relative z-10 w-full lg:flex-1 lg:max-w-[680px]">
               <BorderGlow
                 edgeSensitivity={20}
@@ -130,11 +127,8 @@ export default function HeroSection() {
               </BorderGlow>
             </div>
 
-            {/* ── Video: pill on mobile (below card), floating on desktop (beside card) ── */}
-
-            {/* Video hidden on mobile — desktop only */}
-
-            {/* Desktop: tall pill beside card */}
+          
+          
             <div
               className="hidden lg:block flex-shrink-0"
               style={{
@@ -146,7 +140,6 @@ export default function HeroSection() {
                 position: "relative",
               }}
             >
-              {/* Left-side fade so it blends with the card */}
               <div
                 className="absolute inset-0 z-10 pointer-events-none"
                 style={{ background: "linear-gradient(to right, #faf7f4 -10%, transparent 40%)" }}
@@ -162,7 +155,6 @@ export default function HeroSection() {
         </div>
       </section>
 
-      {/* ─── Category Strip ─── */}
       <section className="py-12 md:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-6 md:mb-8">
           <p className="text-xs uppercase tracking-widest text-gray-400 mb-2">Shop by Category</p>
@@ -171,7 +163,6 @@ export default function HeroSection() {
           </h2>
         </div>
 
-        {/* Snap-scroll carousel */}
         <div
           className="flex gap-3 sm:gap-4 px-4 sm:px-6 lg:px-8 overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-2"
           style={{ WebkitOverflowScrolling: "touch" }}
@@ -180,7 +171,6 @@ export default function HeroSection() {
             <Link
               href={cat.href}
               key={cat.name}
-              // Responsive card width: smaller on mobile, larger on md+
               className="flex-shrink-0 snap-start w-[200px] sm:w-[260px] md:w-[300px] lg:w-[340px] xl:w-96"
             >
               <div className="relative overflow-hidden rounded-2xl aspect-[3/4] group cursor-pointer">

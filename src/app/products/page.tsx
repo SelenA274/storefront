@@ -33,7 +33,7 @@ export default async function ProductsPage({ searchParams }: Props) {
         <h1 className="font-serif text-5xl text-gray-900">{title}</h1>
       </div>
 
-      {/* Filter Bar */}
+
       {subcategories.length > 0 && (
         <div className="border-b border-gray-100 bg-[#faf7f4]">
           <div className="max-w-7xl mx-auto px-18 flex items-center justify-center gap-15 h-12">

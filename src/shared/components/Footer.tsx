@@ -73,7 +73,7 @@ export default function Footer() {
           }
         }
 
-        /* Brand col spans full width on the 2-col sm layout */
+
         @media (min-width: 640px) and (max-width: 1023px) {
           .footer-brand-col {
             grid-column: 1 / -1;
@@ -81,15 +81,15 @@ export default function Footer() {
         }
       `}</style>
 
-      {/* Gold top divider */}
+
       <div style={{ height: "1px", background: "linear-gradient(90deg, transparent, #c9a96e 30%, #c9a96e 70%, transparent)", opacity: 0.5 }} />
 
       <div style={{ background: "linear-gradient(160deg, #faf7f2 0%, #f2ebe0 60%, #ede4d3 100%)" }}>
 
-        {/* Main grid */}
+
         <div className="footer-grid">
 
-          {/* Brand column */}
+
           <div className="footer-brand-col" style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
             <div>
               <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "3rem", fontWeight: 500, letterSpacing: "0.15em", color: "#2a1f14", margin: "0 0 4px", lineHeight: 1 }}>
@@ -104,7 +104,7 @@ export default function Footer() {
               Curated beauty essentials for the discerning woman. Elegance, crafted.
             </p>
 
-            {/* Social icons */}
+
             <div style={{ display: "flex", gap: "16px" }}>
               {[
                 {
@@ -135,7 +135,7 @@ export default function Footer() {
               ))}
             </div>
 
-            {/* Newsletter */}
+
             <div style={{ background: "rgba(255,255,255,0.55)", backdropFilter: "blur(12px)", borderRadius: "20px", border: "1px solid rgba(201,169,110,0.2)", padding: "24px", boxShadow: "0 4px 20px rgba(180,150,100,0.08)" }}>
               <p style={{ fontSize: "0.68rem", letterSpacing: "0.25em", textTransform: "uppercase", color: "#c9a96e", margin: "0 0 6px", fontWeight: 600 }}>
                 The Insider List
@@ -157,7 +157,7 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Shop */}
+
           <div>
             <p style={{ fontSize: "0.65rem", letterSpacing: "0.35em", textTransform: "uppercase", color: "#c9a96e", marginBottom: "24px", fontWeight: 600 }}>Shop</p>
             <div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
@@ -172,7 +172,7 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Help */}
+
           <div>
             <p style={{ fontSize: "0.65rem", letterSpacing: "0.35em", textTransform: "uppercase", color: "#c9a96e", marginBottom: "24px", fontWeight: 600 }}>Help</p>
             <div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
@@ -182,7 +182,7 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* About */}
+
           <div>
             <p style={{ fontSize: "0.65rem", letterSpacing: "0.35em", textTransform: "uppercase", color: "#c9a96e", marginBottom: "24px", fontWeight: 600 }}>About</p>
             <div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
@@ -193,7 +193,7 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Bottom bar */}
+
         <div className="footer-bottom">
           <p style={{ fontSize: "0.7rem", color: "#b0a090", letterSpacing: "0.1em", margin: 0 }}>
             © 2026 VELO BEAUTY. ALL RIGHTS RESERVED.

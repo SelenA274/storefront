@@ -45,7 +45,7 @@ export default function VerifyEmailPage() {
         .gold-btn { transition: all 0.25s ease !important; }
       `}</style>
 
-      {/* Decorative circles */}
+
       <div style={{ position: "absolute", top: "-80px", right: "-80px", width: "420px", height: "420px", borderRadius: "50%", background: "radial-gradient(circle, rgba(201,169,110,0.18) 0%, transparent 70%)", filter: "blur(40px)", pointerEvents: "none" }} />
       <div style={{ position: "absolute", bottom: "-100px", left: "-100px", width: "520px", height: "520px", borderRadius: "50%", background: "radial-gradient(circle, rgba(201,169,110,0.12) 0%, transparent 70%)", filter: "blur(60px)", pointerEvents: "none" }} />
       <div style={{ position: "absolute", top: "40%", left: "60%", width: "300px", height: "300px", borderRadius: "50%", background: "radial-gradient(circle, rgba(239,213,170,0.15) 0%, transparent 70%)", filter: "blur(50px)", pointerEvents: "none" }} />
@@ -65,7 +65,7 @@ export default function VerifyEmailPage() {
         textAlign: "center" as const,
       }}>
 
-        {/* Icon */}
+
         <div style={{
           width: "68px", height: "68px", borderRadius: "50%",
           background: "linear-gradient(135deg, #f5e6cc, #e8d5b0)",
@@ -76,7 +76,7 @@ export default function VerifyEmailPage() {
           <ShieldCheck size={30} color="#c9a96e" />
         </div>
 
-        {/* Header */}
+
         <div style={{ marginBottom: "36px" }}>
           <p style={{
             fontSize: "0.7rem", letterSpacing: "0.35em", textTransform: "uppercase" as const,
@@ -96,7 +96,7 @@ export default function VerifyEmailPage() {
           </p>
         </div>
 
-        {/* Form */}
+
         <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column" as const, gap: "14px" }}>
           <input
             placeholder="Enter verification code"

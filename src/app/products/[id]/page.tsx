@@ -103,7 +103,7 @@ function ReviewsSection({
       <hr className="border-gray-100 mb-14" />
       <h2 className="font-serif text-3xl text-gray-900 mb-10">Customer Reviews</h2>
 
-      {/* ── Add review form ── */}
+
       {isAuthenticated && (
         <div className="bg-[#faf7f4] rounded-2xl p-8 mb-12">
           <p className="text-sm uppercase tracking-widest text-gray-500 mb-4">Leave a Review</p>
@@ -125,7 +125,7 @@ function ReviewsSection({
         </div>
       )}
 
-      {/* ── Reviews list ── */}
+
       {ratings.length === 0 ? (
         <p className="text-gray-400 text-sm">No reviews yet. Be the first!</p>
       ) : (
@@ -141,7 +141,7 @@ function ReviewsSection({
             })
             return (
               <div key={r._id} className="flex gap-5 items-start border-b border-gray-100 pb-6">
-                {/* Avatar */}
+
                 <div className="w-10 h-10 rounded-full bg-[#e8d8c4] flex items-center justify-center text-sm font-semibold text-[#a07850] shrink-0 overflow-hidden">
                   {avatar ? (
                     <img src={avatar} alt={name} className="w-full h-full object-cover" />
@@ -169,7 +169,6 @@ function ReviewsSection({
   )
 }
 
-// ─── Main page ────────────────────────────────────────────────────────────────
 
 export default function ProductPage() {
   const { id } = useParams()
@@ -267,7 +266,7 @@ export default function ProductPage() {
         </Link>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 mt-8">
-          {/* Images */}
+
           <div className="flex flex-col gap-4">
             <div className="bg-[#faf7f4] rounded-3xl aspect-square flex items-center justify-center overflow-hidden">
               {displayImage ? (
@@ -296,7 +295,7 @@ export default function ProductPage() {
             )}
           </div>
 
-          {/* Info */}
+
           <div className="flex flex-col justify-center gap-6">
             <ProductMeta product={selectedProduct} />
             <h1 className="font-serif text-5xl text-gray-900">{selectedProduct.name}</h1>
@@ -350,7 +349,7 @@ export default function ProductPage() {
         </div>
       </main>
 
-      {/* ── Reviews ── */}
+
       <ReviewsSection
         productId={id as string}
         ratings={ratings}

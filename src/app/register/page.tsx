@@ -17,7 +17,7 @@ export default function RegisterPage() {
 
       <main className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#fde8ed]">
 
-        {/* الخلفية المتحركة */}
+
         <div className="absolute inset-0 w-full h-full">
           <Grainient
             color1="#fde8ed"
@@ -42,7 +42,7 @@ export default function RegisterPage() {
           />
         </div>
 
-        {/* الكارد */}
+
         <div
           className="relative z-10 w-full max-w-md mx-4 rounded-3xl border border-white/40 shadow-[0_8px_64px_rgba(201,122,143,0.25)] overflow-hidden"
           style={{

@@ -37,7 +37,7 @@ export default function ForgotPasswordPage() {
       position: "relative",
       overflow: "hidden",
     }}>
-      {/* Decorative blurred circles */}
+
       <div style={{ position: "absolute", top: "-80px", right: "-80px", width: "400px", height: "400px", borderRadius: "50%", background: "radial-gradient(circle, rgba(201,169,110,0.18) 0%, transparent 70%)", filter: "blur(40px)", pointerEvents: "none" }} />
       <div style={{ position: "absolute", bottom: "-100px", left: "-100px", width: "500px", height: "500px", borderRadius: "50%", background: "radial-gradient(circle, rgba(201,169,110,0.12) 0%, transparent 70%)", filter: "blur(60px)", pointerEvents: "none" }} />
 
@@ -103,7 +103,7 @@ export default function ForgotPasswordPage() {
       overflow: "hidden",
       padding: "24px",
     }}>
-      {/* Google Fonts */}
+
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Cormorant+Garamond:wght@300;400;500&display=swap');
         .reset-input:focus { outline: none; border-color: #c9a96e !important; box-shadow: 0 0 0 3px rgba(201,169,110,0.12) !important; }
@@ -115,7 +115,7 @@ export default function ForgotPasswordPage() {
         .back-link { transition: opacity 0.2s; }
       `}</style>
 
-      {/* Decorative blurred circles */}
+
       <div style={{ position: "absolute", top: "-80px", right: "-80px", width: "400px", height: "400px", borderRadius: "50%", background: "radial-gradient(circle, rgba(201,169,110,0.18) 0%, transparent 70%)", filter: "blur(40px)", pointerEvents: "none" }} />
       <div style={{ position: "absolute", bottom: "-100px", left: "-100px", width: "500px", height: "500px", borderRadius: "50%", background: "radial-gradient(circle, rgba(201,169,110,0.12) 0%, transparent 70%)", filter: "blur(60px)", pointerEvents: "none" }} />
       <div style={{ position: "absolute", top: "40%", left: "60%", width: "300px", height: "300px", borderRadius: "50%", background: "radial-gradient(circle, rgba(239,213,170,0.15) 0%, transparent 70%)", filter: "blur(50px)", pointerEvents: "none" }} />
@@ -143,7 +143,7 @@ export default function ForgotPasswordPage() {
           <ArrowLeft size={13} /> Back
         </Link>
 
-        {/* Header */}
+
         <div style={{ marginBottom: "36px" }}>
           <p style={{
             fontSize: "0.7rem", letterSpacing: "0.35em", textTransform: "uppercase" as const,
@@ -163,9 +163,9 @@ export default function ForgotPasswordPage() {
           </p>
         </div>
 
-        {/* Form */}
+
         <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column" as const, gap: "16px" }}>
-          {/* Email input with icon */}
+
           <div style={{ position: "relative" as const }}>
             <Mail
               size={16}
@@ -199,7 +199,7 @@ export default function ForgotPasswordPage() {
             />
           </div>
 
-          {/* Gold gradient button */}
+
           <button
             type="submit"
             disabled={loading}
@@ -224,7 +224,7 @@ export default function ForgotPasswordPage() {
           </button>
         </form>
 
-        {/* Divider */}
+
         <div style={{ display: "flex", alignItems: "center", gap: "12px", margin: "28px 0 0" }}>
           <div style={{ flex: 1, height: "1px", background: "rgba(201,169,110,0.15)" }} />
           <span style={{ fontSize: "0.75rem", color: "#c8b99a", fontFamily: "sans-serif" }}>or</span>

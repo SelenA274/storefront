@@ -146,11 +146,11 @@ export default function ProfilePage() {
         .icon-btn:hover { color: #c9a96e !important; }
       `}</style>
 
-      {/* Decorative circles */}
+
       <div style={{ position: "fixed", top: "-120px", right: "-120px", width: "500px", height: "500px", borderRadius: "50%", background: "radial-gradient(circle, rgba(201,169,110,0.14) 0%, transparent 70%)", filter: "blur(50px)", pointerEvents: "none", zIndex: 0 }} />
       <div style={{ position: "fixed", bottom: "-150px", left: "-150px", width: "600px", height: "600px", borderRadius: "50%", background: "radial-gradient(circle, rgba(201,169,110,0.10) 0%, transparent 70%)", filter: "blur(70px)", pointerEvents: "none", zIndex: 0 }} />
 
-      {/* Hero Header */}
+
       <div style={{
         background: "linear-gradient(135deg, rgba(255,255,255,0.7) 0%, rgba(245,235,215,0.6) 100%)",
         backdropFilter: "blur(20px)",
@@ -160,7 +160,7 @@ export default function ProfilePage() {
         position: "relative",
         zIndex: 1,
       }}>
-        {/* Avatar */}
+
         <div style={{
           width: "88px", height: "88px", borderRadius: "50%",
           background: "linear-gradient(135deg, #f5e6cc, #e8d0a0)",
@@ -184,10 +184,10 @@ export default function ProfilePage() {
         
       </div>
 
-      {/* Content */}
+
       <div style={{ maxWidth: "680px", margin: "0 auto", padding: "48px 24px", display: "flex", flexDirection: "column", gap: "24px", position: "relative", zIndex: 1 }}>
 
-        {/* Personal Info Card */}
+
         <div style={glassCard}>
           <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "28px" }}>
             <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
@@ -227,7 +227,7 @@ export default function ProfilePage() {
               </div>
             </div>
 
-            {/* Role + Member Since */}
+
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
               <div style={{ display: "flex", alignItems: "center", gap: "12px", padding: "16px", background: "rgba(255,255,255,0.5)", borderRadius: "16px", border: `1px solid ${goldBorder}` }}>
                 <Crown size={15} color={gold} style={{ flexShrink: 0 }} />
