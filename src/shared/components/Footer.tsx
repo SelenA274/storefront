@@ -16,6 +16,69 @@ export default function Footer() {
         .sub-btn { transition: all 0.25s ease !important; }
         .legal-link:hover { color: #c9a96e !important; }
         .legal-link { transition: color 0.2s; }
+
+        .footer-grid {
+          max-width: 1280px;
+          margin: 0 auto;
+          padding: 60px 24px 48px;
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 40px;
+        }
+        @media (min-width: 640px) {
+          .footer-grid {
+            grid-template-columns: 1fr 1fr;
+            gap: 40px 32px;
+            padding: 60px 32px 48px;
+          }
+        }
+        @media (min-width: 1024px) {
+          .footer-grid {
+            grid-template-columns: 1.4fr 1fr 1fr 1fr;
+            gap: 60px;
+            padding: 80px 48px 64px;
+          }
+        }
+
+        .footer-bottom {
+          border-top: 1px solid rgba(201,169,110,0.2);
+          padding: 20px 24px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 12px;
+          max-width: 1280px;
+          margin: 0 auto;
+          text-align: center;
+        }
+        @media (min-width: 768px) {
+          .footer-bottom {
+            flex-direction: row;
+            justify-content: space-between;
+            text-align: left;
+            padding: 24px 48px;
+          }
+        }
+
+        .legal-links {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 12px 20px;
+          justify-content: center;
+        }
+        @media (min-width: 768px) {
+          .legal-links {
+            gap: 24px;
+            justify-content: flex-end;
+          }
+        }
+
+        /* Brand col spans full width on the 2-col sm layout */
+        @media (min-width: 640px) and (max-width: 1023px) {
+          .footer-brand-col {
+            grid-column: 1 / -1;
+          }
+        }
       `}</style>
 
       {/* Gold top divider */}
@@ -24,10 +87,10 @@ export default function Footer() {
       <div style={{ background: "linear-gradient(160deg, #faf7f2 0%, #f2ebe0 60%, #ede4d3 100%)" }}>
 
         {/* Main grid */}
-        <div style={{ maxWidth: "1280px", margin: "0 auto", padding: "80px 48px 64px", display: "grid", gridTemplateColumns: "1.4fr 1fr 1fr 1fr", gap: "60px" }}>
+        <div className="footer-grid">
 
           {/* Brand column */}
-          <div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
+          <div className="footer-brand-col" style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
             <div>
               <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "3rem", fontWeight: 500, letterSpacing: "0.15em", color: "#2a1f14", margin: "0 0 4px", lineHeight: 1 }}>
                 VELO
@@ -85,9 +148,9 @@ export default function Footer() {
                   type="email"
                   placeholder="Your email"
                   className="newsletter-input"
-                  style={{ flex: 1, border: "1.5px solid rgba(201,169,110,0.25)", borderRadius: "12px", padding: "11px 14px", fontSize: "0.82rem", background: "rgba(255,255,255,0.8)", color: "#2a1f14", fontFamily: "sans-serif", transition: "border-color 0.2s, box-shadow 0.2s" }}
+                  style={{ flex: 1, border: "1.5px solid rgba(201,169,110,0.25)", borderRadius: "12px", padding: "11px 14px", fontSize: "0.82rem", background: "rgba(255,255,255,0.8)", color: "#2a1f14", fontFamily: "sans-serif", transition: "border-color 0.2s, box-shadow 0.2s", minWidth: 0 }}
                 />
-                <button className="sub-btn" style={{ background: "linear-gradient(135deg, #c9a96e, #a8803d)", color: "#fff", border: "none", borderRadius: "12px", padding: "11px 16px", fontSize: "0.82rem", cursor: "pointer", fontWeight: 600, boxShadow: "0 4px 14px rgba(201,169,110,0.28)", whiteSpace: "nowrap" }}>
+                <button className="sub-btn" style={{ background: "linear-gradient(135deg, #c9a96e, #a8803d)", color: "#fff", border: "none", borderRadius: "12px", padding: "11px 16px", fontSize: "0.82rem", cursor: "pointer", fontWeight: 600, boxShadow: "0 4px 14px rgba(201,169,110,0.28)", whiteSpace: "nowrap", flexShrink: 0 }}>
                   →
                 </button>
               </div>
@@ -131,11 +194,11 @@ export default function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div style={{ borderTop: "1px solid rgba(201,169,110,0.2)", padding: "24px 48px", display: "flex", justifyContent: "space-between", alignItems: "center", maxWidth: "1280px", margin: "0 auto" }}>
+        <div className="footer-bottom">
           <p style={{ fontSize: "0.7rem", color: "#b0a090", letterSpacing: "0.1em", margin: 0 }}>
             © 2026 VELO BEAUTY. ALL RIGHTS RESERVED.
           </p>
-          <div style={{ display: "flex", gap: "24px" }}>
+          <div className="legal-links">
             {["Privacy Policy", "Terms of Service", "Cookie Policy", "Accessibility"].map((item) => (
               <span key={item} className="legal-link" style={{ fontSize: "0.7rem", color: "#b0a090", letterSpacing: "0.08em", cursor: "pointer" }}>
                 {item.toUpperCase()}
