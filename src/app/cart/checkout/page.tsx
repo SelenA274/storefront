@@ -27,31 +27,22 @@ export default function CheckoutPage() {
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setLoading(true)
-    try {
-      await api.post("/order", {
-        items: items.filter((i: any) => i.product).map((i: any) => ({ product: i.product._id, quantity: i.quantity })),
-        shippingAddress: {
-          fullName: address.fullName,
-          phone: address.phone,
-          street: address.street,
-          city: address.city,
-          zipCode: address.zip,
-          country: address.country,
-        },
-        paymentMethod: "simulated",
+    e.preventDefault();
+
+    sessionStorage.setItem(
+      "shippingDetails",
+      JSON.stringify({
+        fullName: address.fullName,
+        phone: address.phone,
+        street: address.street,
+        city: address.city,
+        zipCode: address.zip,
+        country: address.country,
       })
-      await cartService.clearCart()
-      dispatch(clearCart())
-      toast.success("Order placed successfully!")
-      router.push("/orders")
-    } catch (err: any) {
-      toast.error(err.response?.data?.message || "Failed to place order")
-    } finally {
-      setLoading(false)
-    }
-  }
+    );
+
+    router.push("/cart/payment");
+  };
 
   if (!isAuthenticated) return (
     <main className="flex min-h-screen items-center justify-center">
@@ -91,13 +82,13 @@ export default function CheckoutPage() {
             disabled={loading}
             className="bg-gray-900 text-white py-4 rounded-full hover:bg-[#c97a8f] transition text-sm uppercase tracking-widest mt-4 disabled:opacity-50"
           >
-            {loading ? "Placing Order..." : "Place Order"}
+            {loading ? "Redirecting..." : "Continue to Payment"}
           </button>
         </form>
         <div>
           <h2 className="font-serif text-2xl mb-6">Order Summary</h2>
           <div className="flex flex-col gap-4">
-          {items.filter((item: any) => item.product).map((item: any) => (
+            {items.filter((item: any) => item.product).map((item: any) => (
               <div key={item._id} className="flex justify-between py-3 border-b border-gray-100">
                 <div>
                   <p className="font-medium">{item.product.name}</p>
