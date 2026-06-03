@@ -1,36 +1,162 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# VELO Beauty Storefront
 
-## Getting Started
+## Overview
 
-First, run the development server:
+VELO Beauty Storefront is a modern e-commerce web application designed to provide customers with a seamless online shopping experience. The platform allows users to browse beauty products, manage their shopping cart, place orders, and maintain personal accounts through a responsive and user-friendly interface.
+
+This application serves as the customer-facing component of the VELO Beauty E-Commerce Platform.
+
+---
+
+## Features
+
+### Customer Authentication
+- User Registration
+- User Login
+- Logout
+- Password Recovery
+- Password Reset
+
+### Product Catalog
+- Browse Products
+- View Product Details
+- Product Variants
+- Ratings and Reviews
+- Category Navigation
+
+### Shopping Experience
+- Add Products to Cart
+- Update Cart Items
+- Remove Products
+- Checkout Process
+- Order History
+
+### User Profile
+- Manage Personal Information
+- Manage Shipping Addresses
+- View Previous Orders
+
+### Real-Time Updates
+- Live Stock Monitoring
+- Product Availability Updates
+
+---
+
+## Technologies Used
+
+### Frontend
+- Next.js 16
+- React 19
+- TypeScript
+- Tailwind CSS
+
+### State Management
+- Redux Toolkit
+- React Redux
+
+### API Communication
+- Axios
+
+### Real-Time Communication
+- Socket.IO Client
+
+### Additional Libraries
+- GSAP
+- Embla Carousel
+- Lucide React
+- React Toastify
+
+---
+
+## Project Structure
+
+```text
+src/
+├── app/
+├── features/
+│   ├── auth/
+│   ├── products/
+│   ├── cart/
+│   ├── orders/
+│   └── profile/
+├── shared/
+├── hooks/
+├── lib/
+└── store/
+```
+
+---
+
+## Installation
+
+### Clone Repository
+
+```bash
+git clone https://github.com/SelenA274/storefront.git
+```
+
+### Install Dependencies
+
+```bash
+npm install
+```
+
+### Configure Environment Variables
+
+Create a `.env.local` file:
+
+```env
+NEXT_PUBLIC_API_URL=your_backend_url
+NEXT_PUBLIC_SITE_URL=your_website_url
+```
+
+### Run Development Server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```text
+http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## System Architecture
 
-To learn more about Next.js, take a look at the following resources:
+```text
+Customer
+   ↓
+Storefront (Next.js)
+   ↓
+Backend API
+   ↓
+MongoDB Atlas
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Future Enhancements
 
-## Deploy on Vercel
+- Wishlist Functionality
+- Product Recommendations
+- Advanced Search and Filtering
+- Multi-language Support
+- Online Payment Integration
+- Improved Analytics
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Related Repositories
+
+- Backend API: https://github.com/SelenA274/ecommerce-backend
+- CRM Dashboard: https://github.com/SelenA274/crm
+
+---
+
+## Author
+
+Selen amasha
+Software Engineer Student
